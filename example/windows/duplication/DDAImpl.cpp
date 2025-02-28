@@ -268,7 +268,7 @@ void duplicateThread() {
       queryDesc.Query = D3D11_QUERY_EVENT;
       queryDesc.MiscFlags = 0;
       HRC(device->CreateQuery(&queryDesc, query.ReleaseAndGetAddressOf()));
-      auto start = std::chrono::high_resolution_clock::now();
+      auto start = std::chrono::steady_clock::now();
       deviceContext->Begin(query.Get());
       deviceContext->CopyResource(sharedTexture.Get(), texture.Get());
       deviceContext->End(query.Get());
@@ -283,7 +283,7 @@ void duplicateThread() {
         }
       }
       deviceContext->Flush();
-      auto end = std::chrono::high_resolution_clock::now();
+      auto end = std::chrono::steady_clock::now();
       auto elapsed =
           std::chrono::duration_cast<std::chrono::milliseconds>(end - start)
               .count();

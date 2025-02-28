@@ -128,7 +128,7 @@ bool D3D11Output::Present() {
 
 void D3D11Output::SetFPS() {
   this_fps_++;
-  auto now = std::chrono::high_resolution_clock::now();
+  auto now = std::chrono::steady_clock::now();
   auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(
                      now - fps_time_point_.load())
                      .count();
